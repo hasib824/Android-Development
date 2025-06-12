@@ -5,6 +5,10 @@ This repository demonstrates various valid and invalid ways to pass `suspend` fu
 
 ---
 
+📂 **Code Reference**: [Anonymous functions.kt](https://github.com/hasib824/Android-Development/blob/main/Anonymous%20functions.kt)
+
+---
+
 ## ✅ Valid Techniques
 
 ### 1. Inline suspend lambda (most common):
