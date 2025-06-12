@@ -23,10 +23,10 @@ The lambda is automatically inferred as `suspend` because `map()` expects a `sus
 
 ### 2. Named suspend function reference:
 ```kotlin
-suspend fun double(x: Int): Int = x * 2
+suspend fun nyFunction(x: Int): Int = x * 2
 
 flowOf(1, 2, 3)
-    .map(::double)
+    .map(::nyFunction)
     .collect { println(it) }
 ```
 
@@ -34,10 +34,10 @@ flowOf(1, 2, 3)
 
 ### 3. Assigning suspend lambda to a variable:
 ```kotlin
-val suspendingDouble: suspend (Int) -> Int = { it * 2 }
+val suspendingFunction: suspend (Int) -> Int = { it * 2 }
 
 flowOf(1, 2, 3)
-    .map(suspendingDouble)
+    .map(suspendingFunction)
     .collect { println(it) }
 ```
 
