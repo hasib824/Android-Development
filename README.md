@@ -1,2 +1,79 @@
-# Android-Development
-Android development new technologies will be listed here
+
+# 🌀 Kotlin Flow `map` with Suspend Functions – Examples & Pitfalls
+
+This repository demonstrates various valid and invalid ways to pass `suspend` functions to Kotlin Flow operators like `map`.
+
+---
+
+## ✅ Valid Techniques
+
+### 1. Inline suspend lambda (most common):
+```kotlin
+flowOf(1, 2, 3)
+    .map { it * 2 }
+    .collect { println(it) }
+```
+The lambda is automatically inferred as `suspend` because `map()` expects a `suspend` function.
+
+---
+
+### 2. Named suspend function reference:
+```kotlin
+suspend fun double(x: Int): Int = x * 2
+
+flowOf(1, 2, 3)
+    .map(::double)
+    .collect { println(it) }
+```
+
+---
+
+### 3. Assigning suspend lambda to a variable:
+```kotlin
+val suspendingDouble: suspend (Int) -> Int = { it * 2 }
+
+flowOf(1, 2, 3)
+    .map(suspendingDouble)
+    .collect { println(it) }
+```
+
+---
+
+### 4. Anonymous object implementing suspend functional type:
+```kotlin
+val transformer = object : suspend (Int) -> Int {
+    override suspend fun invoke(x: Int): Int = x * 2
+}
+
+flowOf(1, 2, 3)
+    .map(transformer)
+    .collect { println(it) }
+```
+
+---
+
+## ❌ Invalid Techniques
+
+### Not valid Kotlin syntax:
+```kotlin
+flowOf(1, 2, 3)
+    .map(suspend { x -> x * 2 }) // ❌ Compilation error
+```
+
+---
+
+### Also invalid:
+```kotlin
+.map(suspend fun(x: Int): Int { return x * 2 }) // ❌ Not allowed
+```
+
+---
+
+## 📚 Explanation
+
+Kotlin doesn’t allow `suspend` as a modifier before anonymous lambdas like `suspend { ... }`. You must either:
+
+- Let the compiler infer the `suspend` nature through context (`map { ... }`)
+- Use a variable or function with an explicit `suspend` type
+
+This repo is a handy reference for Kotlin developers working with `Flow` and suspend functions.
