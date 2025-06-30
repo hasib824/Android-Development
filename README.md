@@ -77,6 +77,9 @@ flowOf(1, 2, 3)
 
 Kotlin doesn’t allow `suspend` as a modifier before anonymous lambdas like `suspend { ... }`. You must either:
 
+## 📚 Kotlin Function References of extention Function
+https://claude.ai/public/artifacts/6c480dc8-56d2-4f37-a9d5-7de0add79ce2
+
 - Let the compiler infer the `suspend` nature through context (`map { ... }`)
 - Use a variable or function with an explicit `suspend` type
 
